@@ -46,10 +46,10 @@ ninja install
 # build protobuf debug
 build_type=linux-x64-debug
 protobuf_install_dir="${script_path}/protobuf"
-protobuf_install_includedir="include"
-protobuf_install_libdir="lib/${build_type}"
+protobuf_install_includedir="${protobuf_install_dir}/include"
+protobuf_install_libdir="${protobuf_install_dir}/lib/${build_type}"
 protobuf_install_cmakedir="${protobuf_install_libdir}/cmake"
-protobuf_install_bindir="bin"
+protobuf_install_bindir="${protobuf_install_dir}/bin"
 
 zlib_includedir="${script_path}/zlib/include/linux"
 zlib_libdir="${script_path}/zlib/lib/${build_type}/libz.a"
@@ -77,10 +77,10 @@ ninja install
 
 # build protobuf release
 build_type=linux-x64-release
-protobuf_install_includedir="include"
-protobuf_install_libdir="lib/${build_type}"
+protobuf_install_includedir="${protobuf_install_dir}/include"
+protobuf_install_libdir="${protobuf_install_dir}/lib/${build_type}"
 protobuf_install_cmakedir="${protobuf_install_libdir}/cmake"
-protobuf_install_bindir="bin"
+protobuf_install_bindir="${protobuf_install_dir}/bin"
 
 zlib_includedir="${script_path}/zlib/include/linux"
 zlib_libdir="${script_path}/zlib/lib/${build_type}/libz.a"
