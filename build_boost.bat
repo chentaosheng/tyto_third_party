@@ -22,24 +22,45 @@ REM set the environment variables
 call "%InstallDir%\VC\Auxiliary\Build\vcvarsall.bat" x64 -vcvars_ver=%Version%
 
 REM build boost debug
+set BuildType=windows-x64-debug
 cd "%~dp0\boost\include"
 call .\bootstrap.bat
-.\b2 --build-dir=build\windows-x64-debug toolset=msvc architecture=x86 address-model=64 runtime-link=static link=static threading=multi variant=debug define=BOOST_USE_WINAPI_VERSION=0x0A00 --stagedir=..\lib\ stage
+.\b2 --build-dir=build\%BuildType% ^
+    toolset=msvc ^
+    architecture=x86 ^
+    address-model=64 ^
+    runtime-link=static ^
+    link=static ^
+    threading=multi ^
+    variant=debug ^
+    define=BOOST_USE_WINAPI_VERSION=0x0A00 ^
+    --stagedir=..\lib\ ^
+    stage
 
 REM rename output dir
 cd ..
 cd lib
-rename lib windows-x64-debug
+rename lib %BuildType%
 cd ..
 
 REM build boost release
+set BuildType=windows-x64-release
 cd include
-.\b2 --build-dir=build\windows-x64-release toolset=msvc architecture=x86 address-model=64 runtime-link=static link=static threading=multi variant=release define=BOOST_USE_WINAPI_VERSION=0x0A00 --stagedir=..\lib\ stage
+.\b2 --build-dir=build\%BuildType% ^
+    toolset=msvc architecture=x86 ^
+    address-model=64 ^
+    runtime-link=static ^
+    link=static ^
+    threading=multi ^
+    variant=release ^
+    define=BOOST_USE_WINAPI_VERSION=0x0A00 ^
+    --stagedir=..\lib\ ^
+    stage
 
 REM rename output dir
 cd ..
 cd lib
-rename lib windows-x64-release
+rename lib %BuildType%
 cd ..
 
 goto :end
