@@ -33,4 +33,5 @@ fi
     stage
 
 # rename output dir
+rm -rf "${LIBRARY_DIR}/${BUILD_TYPE}"
 mv "${LIBRARY_DIR}/lib" "${LIBRARY_DIR}/${BUILD_TYPE}"

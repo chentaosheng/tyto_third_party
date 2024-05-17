@@ -32,6 +32,7 @@ rem build boost
 
 rem rename output dir
 cd "%LIBRARY_DIR%"
+rmdir /S /Q "%BUILD_TYPE%"
 rename "lib" "%BUILD_TYPE%"
 
 rem exit
