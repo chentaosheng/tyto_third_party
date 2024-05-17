@@ -1,19 +1,21 @@
 @echo off
 setlocal enabledelayedexpansion
 
-call "%~dp0\scripts\find_visual_studio.bat"
+call "%~dp0scripts\find_visual_studio.bat"
 
 if %ERRORLEVEL% NEQ 0 goto :end
 
-set SOURCE_DIR="%~dp0\boost\include"
-set LIBRARY_DIR="%~dp0\boost\lib"
+set SOURCE_DIR=%~dp0boost\include
+set LIBRARY_DIR=%~dp0boost\lib
 
-set BUILD_TYPE="windows-x64-debug"
-set BUILD_DIR="build\%BUILD_TYPE%"
+set BUILD_TYPE=windows-x64-debug
+set BUILD_DIR=build\%BUILD_TYPE%
 
 cd "%SOURCE_DIR%"
 
-call .\bootstrap.bat
+if not exist "b2.exe" (
+    call .\bootstrap.bat
+)
 
 rem build boost
 .\b2 --build-dir="%BUILD_DIR%" ^
@@ -29,8 +31,9 @@ rem build boost
     stage
 
 rem rename output dir
-rename "%LIBRARY_DIR%\lib" "%LIBRARY_DIR%\%BUILD_TYPE%"
+cd "%LIBRARY_DIR%"
+rename "lib" "%BUILD_TYPE%"
 
 rem exit
 :end
-pause
+exit /b 0

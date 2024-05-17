@@ -1,16 +1,16 @@
 rem find the installation path of the Visual Studio
-for /f "usebackq tokens=*" %%i in (`%~dp0\..\bin\vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
-  set VISUAL_STUDIO_DIR=%%i
+for /f "usebackq tokens=*" %%i in (`%~dp0..\bin\vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do (
+    set VISUAL_STUDIO_DIR=%%i
 )
 
 if "%VISUAL_STUDIO_DIR%" == "" goto :error
 
 rem find the version of the cl.exe
 if exist "%VISUAL_STUDIO_DIR%\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt" (
-  set /p VISUAL_STUDIO_VERSION=<"%VISUAL_STUDIO_DIR%\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt"
+    set /p VISUAL_STUDIO_VERSION=<"%VISUAL_STUDIO_DIR%\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt"
 
-  rem Trim
-  set VISUAL_STUDIO_VERSION=!VISUAL_STUDIO_VERSION: =!
+    rem Trim
+    set VISUAL_STUDIO_VERSION=!VISUAL_STUDIO_VERSION: =!
 )
 
 if "%VISUAL_STUDIO_VERSION%" == "" goto :error

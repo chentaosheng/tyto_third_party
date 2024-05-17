@@ -15,7 +15,9 @@ BUILD_DIR="build/${BUILD_TYPE}"
 
 cd "${SOURCE_DIR}"
 
-bash ./bootstrap.sh
+if [ ! -e "b2" ]; then
+    bash ./bootstrap.sh
+fi
 
 # build boost
 ./b2 --build-dir="${BUILD_DIR}" \
@@ -26,7 +28,6 @@ bash ./bootstrap.sh
     link=static \
     threading=multi \
     variant=debug \
-    cflags="${C_BUILD_FLAGS_DEBUG}" \
     cxxflags="${CXX_BUILD_FLAGS_DEBUG}" \
     --stagedir="${LIBRARY_DIR}" \
     stage
